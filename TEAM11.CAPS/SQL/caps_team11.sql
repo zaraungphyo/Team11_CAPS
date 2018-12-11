@@ -21,7 +21,7 @@ CREATE TABLE `caps_team11`.`user` (
 CREATE TABLE `caps_team11`.`course` (
   `COURSEID` INT NOT NULL,
   `COURSE_NAME` VARCHAR(100) NOT NULL,
-  `COURSE_DESCRIPTION` VARCHAR(200) NULL,
+  `COURSE_DESCRIPTION` VARCHAR(1000) NULL DEFAULT NULL,
   `CLASS_SIZE` INT NOT NULL,
   `NUMBER_REGISTERED` INT NOT NULL,
   `CREDIT` INT NOT NULL,
@@ -38,13 +38,14 @@ CREATE TABLE `caps_team11`.`course` (
   );
 
 
+
 CREATE TABLE `caps_team11`.`student_enrollment` (
   `STUDENT_ENROLL_ID` INT NOT NULL,
   `COURSEID` INT NOT NULL,
   `STUDENTID` INT NOT NULL,
   `DATE_REGISTERED` DATE NOT NULL,
   `STATUS_ENROLL` VARCHAR(45) NOT NULL,
-  `SCORE` INT DEFAULT NULL,
+  `SCORE` INT(11) DEFAULT NULL,
   PRIMARY KEY (`STUDENT_ENROLL_ID`)  ,
    CONSTRAINT FK_COURSEID FOREIGN KEY (COURSEID)
     REFERENCES `caps_team11`.`course`(COURSEID)
@@ -56,11 +57,6 @@ CREATE TABLE `caps_team11`.`student_enrollment` (
 INSERT INTO `caps_team11`.`role` (`ROLEID`, `NAME`, `ROLE_DESCRIPTION`) VALUES ('1', 'Administrator', 'Manage Students, Manage Lecturers, Manage Courses, Manage Enrolment, Maintain User Roles,Change Password ');
 INSERT INTO `caps_team11`.`role` (`ROLEID`, `NAME`, `ROLE_DESCRIPTION`) VALUES ('2', 'Lecturer', 'View Courses Taught, View Course Enrolment, Manage Course Student Grades, View Student Performance, Change Password');
 INSERT INTO `caps_team11`.`role` (`ROLEID`, `NAME`, `ROLE_DESCRIPTION`) VALUES ('3', 'Student', 'View Grades and GPA, View Full Course List and Course Details, View Courses Enrolled, Enrol for a Course, Cancel Course, Vie Profile, Change Password');
-
-ALTER TABLE `caps_team11`.`course` 
-CHANGE COLUMN `COURSE_DESCRIPTION` `COURSE_DESCRIPTION` VARCHAR(1000) NULL DEFAULT NULL ,
-CHANGE COLUMN `ASSIGNED_LECTURERID` `ASSIGNED_LECTURERID` INT(11) NULL ;
-
 
 INSERT INTO `caps_team11`.`course` (`COURSEID`, `COURSE_NAME`, `COURSE_DESCRIPTION`, `CLASS_SIZE`, `NUMBER_REGISTERED`, `CREDIT`, `START_DATE`, `END_DATE`, `WEEKDAY`, `START_TIME`, `END_TIME`, `EXAM_TIMIE`) VALUES ('1101', 'Introduction to Business Analytics', 'This module provides students with an introduction to the fundamental concepts and tools needed to understand the emerging role of business analytics in business and non-profit organizations. The module aims to demonstrate to students how to apply basic business analytics tools in a spreadsheet environment, and how to communicate with analytics professionals to effectively use and interpret analytic models and results for making better and more well-informed business decisions.', '20', '0', '4', '2019-01-13', '2019-05-31', 'MON', '10:00:00', '12:00:00', '2019-06-05 09:00:00');
 
@@ -160,63 +156,34 @@ INSERT INTO `caps_team11`.`user` (`USERID`, `FIRST_MID_NAME`, `LAST_NAME`, `ROLE
 
 
 
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('1', '2101', '1', '2016-12-01', 'sucessful', 'B');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('2', '2101', '2', '2016-12-01', 'sucessful', 'B');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('3', '2101', '3', '2016-12-01', 'sucessful', 'B');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('4', '2102', '1', '2016-12-01', 'sucessful', 'B');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('5', '2101', '5', '2016-12-03', 'sucessful', 'B+');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('6', '2101', '6', '2016-12-03', 'sucessful', 'B');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('7', '2101', '7', '2016-12-05', 'sucessful', 'B_');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('8', '2101', '8', '2016-12-01', 'sucessful', 'B');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('9', '2101', '9', '2016-12-01', 'sucessful', 'B');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('10', '2101', '10', '2016-12-02', 'sucessful', 'F');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('11', '2101', '11', '2016-12-12', 'sucessful', 'D');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('12', '2101', '12', '2016-12-13', 'sucessful', 'A');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('13', '2101', '13', '2016-12-11', 'sucessful', 'A-');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('14', '2101', '14', '2016-12-11', 'sucessful', 'A+');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('15', '2101', '15', '2016-12-14', 'sucessful', 'B');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('16', '2101', '16', '2016-12-13', 'sucessful', 'B+');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('17', '2101', '17', '2016-12-13', 'sucessful', 'B');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('18', '2101', '18', '2016-12-12', 'sucessful', 'B');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('19', '2101', '19', '2016-12-11', 'sucessful', 'F');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('20', '2101', '20', '2016-12-01', 'sucessful', 'B-');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('21', '2101', '21', '2016-12-01', 'sucessful', 'B');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('22', '2101', '22', '2016-12-08', 'sucessful', 'B');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('23', '2033', '1', '2016-12-09', 'sucessful', 'D');
-
-
-ALTER TABLE `caps_team11`.`student_enrollment` 
-CHANGE COLUMN `SCORE` `SCORE` VARCHAR(45) NULL ;
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('1', '2101', '1', '2016-12-01', 'sucessful', 56);
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('2', '2101', '2', '2016-12-01', 'sucessful', 78);
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('3', '2101', '3', '2016-12-01', 'sucessful', 55);
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('4', '2102', '1', '2016-12-01', 'sucessful', 67);
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('5', '2101', '5', '2016-12-03', 'sucessful', 53);
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('6', '2101', '6', '2016-12-03', 'sucessful', 46);
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('7', '2101', '7', '2016-12-05', 'sucessful', 78);
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('8', '2101', '8', '2016-12-01', 'sucessful', 54);
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('9', '2101', '9', '2016-12-01', 'sucessful', 56);
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('10', '2101', '10', '2016-12-02', 'sucessful', 61);
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('11', '2101', '11', '2016-12-12', 'sucessful', 39);
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('12', '2101', '12', '2016-12-13', 'sucessful', 65);
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('13', '2101', '13', '2016-12-11', 'sucessful',66);
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('14', '2101', '14', '2016-12-11', 'sucessful', 55);
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('15', '2101', '15', '2016-12-14', 'sucessful', 45);
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('16', '2101', '16', '2016-12-13', 'sucessful', 56);
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('17', '2101', '17', '2016-12-13', 'sucessful', 87);
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('18', '2101', '18', '2016-12-12', 'sucessful', 46);
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('19', '2101', '19', '2016-12-11', 'sucessful', 45);
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('20', '2101', '20', '2016-12-01', 'sucessful', 34);
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('21', '2101', '21', '2016-12-01', 'sucessful', 54);
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('22', '2101', '22', '2016-12-08', 'sucessful', 56);
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`, `SCORE`) VALUES ('23', '2033', '1', '2016-12-09', 'sucessful', 39);
 
 
 
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`) VALUES ('24', '2101', '4', '2016-12-14', 'unsucessful');
-INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`) VALUES ('25', '2101', '25', '2016-12-14', 'unsucessful');
-
-
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '67' WHERE (`STUDENT_ENROLL_ID` = '1');
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '78' WHERE (`STUDENT_ENROLL_ID` = '2');
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '80' WHERE (`STUDENT_ENROLL_ID` = '3');
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '56' WHERE (`STUDENT_ENROLL_ID` = '4');
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '34' WHERE (`STUDENT_ENROLL_ID` = '5');
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '89' WHERE (`STUDENT_ENROLL_ID` = '6');
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '45' WHERE (`STUDENT_ENROLL_ID` = '7');
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '67' WHERE (`STUDENT_ENROLL_ID` = '8');
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '87' WHERE (`STUDENT_ENROLL_ID` = '9');
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '56' WHERE (`STUDENT_ENROLL_ID` = '10');
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '77' WHERE (`STUDENT_ENROLL_ID` = '11');
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '76' WHERE (`STUDENT_ENROLL_ID` = '12');
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '79' WHERE (`STUDENT_ENROLL_ID` = '13');
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '88' WHERE (`STUDENT_ENROLL_ID` = '14');
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '23' WHERE (`STUDENT_ENROLL_ID` = '15');
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '69' WHERE (`STUDENT_ENROLL_ID` = '16');
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '75' WHERE (`STUDENT_ENROLL_ID` = '17');
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '45' WHERE (`STUDENT_ENROLL_ID` = '18');
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '49' WHERE (`STUDENT_ENROLL_ID` = '19');
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '63' WHERE (`STUDENT_ENROLL_ID` = '20');
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '58' WHERE (`STUDENT_ENROLL_ID` = '21');
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '68' WHERE (`STUDENT_ENROLL_ID` = '22');
-UPDATE `caps_team11`.`student_enrollment` SET `SCORE` = '47' WHERE (`STUDENT_ENROLL_ID` = '23');
-
-
-
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`,`SCORE`)
+ VALUES ('24', '2101', '4', '2016-12-14', 'unsucessful',67);
+ 
+INSERT INTO `caps_team11`.`student_enrollment` (`STUDENT_ENROLL_ID`, `COURSEID`, `STUDENTID`, `DATE_REGISTERED`, `STATUS_ENROLL`,`SCORE`)
+ VALUES ('25', '2101', '25', '2016-12-14', 'unsucessful',46);

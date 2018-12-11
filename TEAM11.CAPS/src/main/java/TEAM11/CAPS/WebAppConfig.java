@@ -33,8 +33,9 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 @EnableTransactionManagement
 @ComponentScan(basePackages="TEAM11.CAPS")
-@PropertySource("classpath:application.properties")
-//@EnableJpaRepositories("edu.iss.cats.repository")
+@PropertySource({ "classpath:application.properties",
+"classpath:/i18n/messages.properties" })
+@EnableJpaRepositories("TEAM11.CAPS.repository")
 public class WebAppConfig extends WebMvcConfigurerAdapter {
 
 	private static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";

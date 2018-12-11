@@ -24,7 +24,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "user")
 public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "USERID")
 	private Integer userid;
 	@Basic
@@ -68,8 +68,7 @@ public class User {
 	@JoinColumn(name="ASSIGNED_LECTURERID")
 	private Course course;
 	
-	public User() {
-	}
+	public User() {}
 
 	public User(Integer userid, String first_mid_name, String last_name, Date date_joined, String email,
 			String password, String status, Role role, StudentEnrolment studentEnrolment, Course course) {

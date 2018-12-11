@@ -9,6 +9,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -19,10 +21,11 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "student_enrollment")
+@Table(name = "student_enrolment")
 public class StudentEnrolment {
 	@Id
-	@Column(name = "STUDENT_ENROLL_ID")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "STUDENT_ENROL_ID")
 	private Integer StudentEnrollID;
 
 	@Basic
@@ -47,10 +50,7 @@ public class StudentEnrolment {
 	private List<User> users;
 
 	
-	public StudentEnrolment() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	public StudentEnrolment() {}
 
 	public StudentEnrolment(Integer studentEnrollID, Date dateRegistered, String statusEnroll, Integer score,
 			List<Course> courses, List<User> users) {

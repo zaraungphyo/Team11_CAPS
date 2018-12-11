@@ -2,8 +2,11 @@ package TEAM11.CAPS.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,9 +22,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "course")
 public class Course {
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "COURSEID")
-	private String courseid;
+	private Integer courseid;
 	
+	@Basic
 	@Column(name = "COURSE_NAME")
 	private String courseName;
 	
@@ -63,25 +68,22 @@ public class Course {
 	@Column(name = "EXAM_TIME")
 	private Date ExamStartTime;
 	
-	@Column(name = "ASSIGNED_LECTURERID")
-	private Integer assignedLecturerid;
+/*	@Column(name = "ASSIGNED_LECTURERID")
+	private Integer assignedLecturerid;*/
 
 	@ManyToOne
 	@JoinColumn(name="COURSEID", insertable=false, updatable=false)
 	private StudentEnrolment studentEnrolment;
 	
 	@OneToMany(mappedBy="course")
-	//@JoinColumn(name="USERID")//ASSIGNED_LECTURERID
+	//@JoinColumn(name="USERID",referencedColumnName="ASSIGNED_LECTURERID")//ASSIGNED_LECTURERID
 	private List<User> users;
 
-	public Course() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	public Course() {	}
 
 
 
-	public Course(String courseid, String courseName, String courseDescription, Integer classSize,
+	public Course(Integer courseid, String courseName, String courseDescription, Integer classSize,
 			Integer numberRegistered, Integer credit, Date startDate, Date endDate, String weedDay, Date startTime,
 			Date endTime, Date examStartTime, Integer assignedLecturerid, StudentEnrolment studentEnrolment,
 			List<User> users) {
@@ -97,15 +99,15 @@ public class Course {
 		this.weedDay = weedDay;
 		this.startTime = startTime;
 		this.endTime = endTime;
-		ExamStartTime = examStartTime;
-		this.assignedLecturerid = assignedLecturerid;
+		this.ExamStartTime = examStartTime;
+		//this.assignedLecturerid = assignedLecturerid;
 		this.studentEnrolment = studentEnrolment;
 		this.users = users;
 	}
 
 
 
-	public String getCourseid() {
+	public Integer getCourseid() {
 		return courseid;
 	}
 
@@ -153,9 +155,9 @@ public class Course {
 		return ExamStartTime;
 	}
 
-	public Integer getAssignedLecturerid() {
+/*	public Integer getAssignedLecturerid() {
 		return assignedLecturerid;
-	}
+	}*/
 
 	public StudentEnrolment getStudentEnrolment() {
 		return studentEnrolment;
